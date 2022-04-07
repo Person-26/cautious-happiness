@@ -1,0 +1,23 @@
+import requests 
+def search(word,string): 
+	check=0 
+	for i in range(0,len(string)): 
+		 
+			if string[i]==word[check]: 
+				check+=1 
+				if check==len(word): 
+					return (i-len(word))+1,i 
+			else: 
+				check=0 
+def rep(word,new,string): 
+	place=search(word,string) 
+	if not place==None: 
+		forward=string[place[1]+1:] 
+		back=string[:place[0]] 
+		return back+new+forward 
+	else: 
+		return string	 
+a=input('enter the link of the github code:-') 
+a=rep('blob','raw',a) 
+res= requests.get(a) 
+exec(res.text) 
